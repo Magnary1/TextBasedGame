@@ -58,6 +58,7 @@ public class Monster extends Character {
 
 	@Override
 	void attack(Character user) {
+		
 				
 		if (this.getName().equals("dog")) {
 			return;

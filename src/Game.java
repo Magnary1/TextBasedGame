@@ -17,13 +17,18 @@ public class Game {
 	}
 	
 	public static void printMenu() {
+		System.out.println("---------------MENU---------------\n");
 		System.out.println("Right - move right");
 		System.out.println("Left - move left");
 		System.out.println("Up - move up");
-		System.out.println("Down - move down");
-		System.out.println("Map - displays map");
-		System.out.println("Help - displays commands");
-		System.out.println("Quit - ends game");
+		System.out.println("Down - move down\n");
+		
+		System.out.println("Map - display map");
+		System.out.println("Health - display current health");
+		System.out.println("Heal - drink health potion\n");
+		System.out.println("Help - display commands");
+		System.out.println("Quit - end game\n");
+		System.out.println("---------------MENU---------------");
 	}
 	
 	public static void executeMenu(String input, Map gameMap, Scanner scnr) {
@@ -49,9 +54,9 @@ public class Game {
     		gameMap.printMap();
 			break;
 		case "health":
-			System.out.println("user health is " + gameMap.user.getHealth());
-			gameMap.user.setHealth(gameMap.user.getHealth()-20);
-			System.out.println("user health is now " + gameMap.user.getHealth());
+			System.out.println("Your health is " + gameMap.user.getHealth() 
+								+ "/" + gameMap.user.getMaxHealth());
+			
 			break;
 		default:
 			System.out.println("Nothing interesting happens. \"help\" for valid commands.");

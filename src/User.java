@@ -10,6 +10,9 @@ public class User extends Character {
 
 	@Override
 	void attack(Character monster) {
+		
+		
+		
 		if (monster.getHealth() == 0) {
 			System.out.println("Stop, it's already dead!");
 			return;

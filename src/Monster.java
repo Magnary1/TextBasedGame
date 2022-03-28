@@ -13,7 +13,7 @@ public class Monster extends Character {
 	}
 
 	public void dropItem(User user) {
-		if (this.getHealth() == 0) {
+		if (this.getHealth() == 0 || this.getName().equals("dog")) {
 			if (this.getHasKey()) {
 				user.setHasKey(true);
 				this.setHasKey(false);
@@ -37,9 +37,18 @@ public class Monster extends Character {
 				this.setHealthPotions(0);
 				
 				if (this.getName().equals("dog")) {
-					System.out.println("The nice dog wags its tail and gives you a health potion!");
+					if (user.getHealth() != 0) {
+						System.out.println("The nice dog wags its tail and gives you a health potion!");
+						return;
+					} else {
+						return;
+					}
 				}
 				System.out.println("The " + this.getName() + " has dropped health potions!");
+			}
+			
+			if (this.getName().equals("dog") && this.getHealthPotions() == 0 && user.getHealth() != 0) {
+				System.out.println("The nice dog wags its tail.");
 			}
 		}
 		
@@ -50,6 +59,9 @@ public class Monster extends Character {
 	@Override
 	void attack(Character user) {
 				
+		if (this.getName().equals("dog")) {
+			return;
+		}
 		if (this.getHealth() == 0) {
 			return;
 		}

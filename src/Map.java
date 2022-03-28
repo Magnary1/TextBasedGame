@@ -58,22 +58,31 @@ public class Map {
 				
 				break;
 			case "run":
-				System.out.println("You run away");
+				System.out.println("You run away!");
 				break;
 			case "help":
-				printFightMenu();
+				printFightMenu(currMonster);
 				break;
-
+			case "pet":
+				currMonster.dropItem(user);
+				break;
 			default:
+				System.out.println("Nothing interesting happens. \"help\" for valid commands.");
 				break;
 			}
 			if (user.getHealth() == 0) {
 				return;
 			}
+			System.out.println();
 			input = scnr.next();
 		}
 		
 	}
+
+//	private void petTheDog(Monster currMonster) {
+//		
+//		
+//	}
 
 	public void printBattleStart(Monster currMonster) {
 		System.out.print("You have run into ");
@@ -87,12 +96,15 @@ public class Map {
 		
 		System.out.println("What would you like to do?\n");
 		
-		printFightMenu();
+		printFightMenu(currMonster);
 	}
 
-	public void printFightMenu() {
+	public void printFightMenu(Monster currMonster) {
 		System.out.println("Attack - attack");
 		System.out.println("Heal - heal");
+		if (currMonster.getName().equals("dog")) {
+			System.out.println("Pet - pet the dog");
+		}
 		System.out.println("Run - run");
 		System.out.println("Help - display commands");
 	}

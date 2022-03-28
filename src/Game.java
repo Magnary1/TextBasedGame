@@ -39,6 +39,7 @@ public class Game {
 		case "down":
     		gameMap.user.move(input);
     		if (gameMap.getFightingMonsterIndex() == -1) {
+    			System.out.println("You move " + input + ", but there's nothing of interest.");
     			break;
     		} else {
     			gameMap.executeBattle(gameMap.getFightingMonsterIndex(), scnr);

@@ -15,14 +15,23 @@ public class User extends Character {
 			return;
 		}
 		
+		Random randGen = new Random();
+		int damageDealt;
+		
+		if (monster.getName().equals("dog")) {
+			this.setHealth(0);
+			damageDealt=0;
+			printAttackMessage(monster, damageDealt);
+			return;
+		}  
+		
 		if (this.getHealth() == 0) {
 			return;
 		}
 		
-		Random randGen = new Random();
 		
 		int characterCurrHealth = monster.getHealth();
-		int damageDealt = randGen.nextInt(this.getAttackDamage() + 1);
+		damageDealt = randGen.nextInt(this.getAttackDamage() + 1);
 		
 		if (damageDealt > characterCurrHealth) {
 			damageDealt = characterCurrHealth;
@@ -41,18 +50,21 @@ public class User extends Character {
 	@Override
 	void printAttackMessage(Character monster, int damageDealt) {
 		
-		if (monster.getHealth() == 0) {
-			System.out.println("You have killed the " + monster.getName() + "!");
-			return;
-		} else if (this.getHasBearHands()) {
-			System.out.print("You attack with your bear hands. "); 
+		if (monster.getName().equals("dog")) {
+			System.out.println("You slip and die an embarassing death. The dog wags its tail.");
 		} else {
-			System.out.print("You attack with your bare hands. ");
-		}
-		System.out.println("The " + monster.getName() + " takes " + damageDealt + " damage. ("  
-						+ monster.getHealth() + "/" + monster.getMaxHealth() + " health)");
+			if (monster.getHealth() == 0) {
+				System.out.println("You have killed the " + monster.getName() + "!");
+				return;
+			} else if (this.getHasBearHands()) {
+				System.out.print("You attack with your bear hands. "); 
+			} else {
+				System.out.print("You attack with your bare hands. ");
+			}
+			System.out.println("The " + monster.getName() + " takes " + damageDealt + " damage. ("  
+							+ monster.getHealth() + "/" + monster.getMaxHealth() + " health)");
 	}
-
 		
 	}
+}
 

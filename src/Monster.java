@@ -13,27 +13,11 @@ public class Monster extends Character {
 	}
 
 	public void dropItem(User user) {
+		
 		if (this.getHealth() == 0 || this.getName().equals("dog")) {
-			if (this.getHasKey()) {
-				user.setHasKey(true);
-				this.setHasKey(false);
-				System.out.println("The " + this.getName() + " has dropped a key!");
-			}
-			if (this.getHasBearHands()) {
-				user.setHasBearHands(true);
-				user.setAttackDamage(user.getAttackDamage()*2);
-				this.setHasBearHands(false);
-				System.out.println("The " + this.getName() + " has dropped bear hands!");
-			}
-			if (this.getHasMap()) {
-				user.setHasMap(true);
-				this.setHasMap(false);
-				System.out.println("The " + this.getName() + " has dropped a map!");
-			}
-			
-			
 			if (this.getHealthPotions() > 0) {
 				user.setHealthPotions(user.getHealthPotions() + this.getHealthPotions());
+				System.out.println("You have " + user.getHealthPotions() + " health potions.");
 				this.setHealthPotions(0);
 				
 				if (this.getName().equals("dog")) {
@@ -50,6 +34,31 @@ public class Monster extends Character {
 			if (this.getName().equals("dog") && this.getHealthPotions() == 0 && user.getHealth() != 0) {
 				System.out.println("The nice dog wags its tail.");
 			}
+			if (this.getHasKey()) {  // MIGHT USE LATER
+				user.setHasKey(true);
+				this.setHasKey(false);
+				user.setAttackDamage(user.getAttackDamage() * 4);
+//				System.out.println("The " + this.getName() + " has dropped a key!");
+				System.out.println("You feel a little stronger...");
+			}
+			if (this.getHasBearHands()) {
+				user.setHasBearHands(true);
+				user.setAttackDamage(user.getAttackDamage() * 4);
+				this.setHasBearHands(false);
+				System.out.println("The " + this.getName() + " has dropped bear hands!");
+				System.out.println("You feel unbearably strong...");
+			}
+			if (this.getName().equals("king")) {
+				System.out.println("You finished the game!");
+			}
+//			if (this.getHasMap()) {  // MIGHT USE LATER
+//				user.setHasMap(true);
+//				this.setHasMap(false);
+//				System.out.println("The " + this.getName() + " has dropped a map!");
+//			}
+			
+			
+			
 		}
 		
 	}

@@ -48,6 +48,7 @@ public abstract class Character {
 		default:
 			break;
 		}
+		
 	}
 	
 	public String getXY() {
@@ -72,6 +73,10 @@ public abstract class Character {
 
 	public int getMaxHealth() {
 		return MAX_HEALTH;
+	}
+	
+	public String getHealthBar() {
+		return "(" + this.getHealth() + "/" + this.getMaxHealth() + " health)";
 	}
 
 	public int getAttackDamage() {

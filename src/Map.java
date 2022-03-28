@@ -3,13 +3,14 @@ import java.util.Scanner;
 
 public class Map {
 
-	User user = new User("you", "X", 100, 10, false, false, false, 0);
+	User user = new User("you", "X", 100, 4, false, false, false, 0);
+	
 	ArrayList<Monster> monsterList = new ArrayList<Monster>();
 	
-	Monster rat = new Monster("rat", "R", 20, 5, true, false, false, 2);
+	Monster rat = new Monster("rat", "R", 10, 5, true, false, false, 1);
 	Monster dog = new Monster("dog", "D", 1, 1000, false, false, false, 1);
-	Monster bear = new Monster("bear", "B", 50, 10, false, true, true, 5);
-	Monster boss = new Monster("king", "K", 100, 4440, false, false, false, 100);
+	Monster bear = new Monster("bear", "B", 50, 10, false, true, true, 2);
+	Monster boss = new Monster("king", "K", 200, 20, false, false, false, 100);
 	
 	public void addMonsters() {
 		monsterList.add(rat);
@@ -43,19 +44,20 @@ public class Map {
 	public void executeBattle(int fightingMonsterIndex, Scanner scnr) {
 		Monster currMonster = monsterList.get(fightingMonsterIndex);
 		
+		System.out.println();
 		printBattleStart(currMonster);
 		
 		String input = scnr.next();
-	
 		while (!input.toLowerCase().equals("run")) {
+			System.out.println();
 			switch (input) {
 			case "attack":
-				user.attack(currMonster);
-				currMonster.dropItem(user);
-				currMonster.attack(user);
+				user.attackSequence(currMonster);
+//				currMonster.dropItem(user); // necessary. trying to simplify
+//				currMonster.attack(user); // necessary. trying to simplify
 				break;
 			case "heal":
-				
+				user.heal();
 				break;
 			case "run":
 				System.out.println("You run away!");
@@ -100,13 +102,18 @@ public class Map {
 	}
 
 	public void printFightMenu(Monster currMonster) {
+		System.out.println("---------------FIGHT MENU---------------\n");
 		System.out.println("Attack - attack");
-		System.out.println("Heal - heal");
+		System.out.println("Heal - heal " + user.getHealthBar());
 		if (currMonster.getName().equals("dog")) {
 			System.out.println("Pet - pet the dog");
 		}
+		System.out.println();
 		System.out.println("Run - run");
-		System.out.println("Help - display commands");
+		System.out.println("Help - display commands\n");
+		System.out.println("---------------FIGHT MENU---------------");
+		System.out.println();
+
 	}
 	public void printMap() {
 		for (int y=5; y>=1; y--) {  // creates map XY with bottom left box being point (1,1)

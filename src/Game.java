@@ -9,14 +9,14 @@ import java.util.Scanner;
 
 public class Game {
 	
-	public static void printGameStart() {
+	public static void printGameStart(User user) {
 		System.out.println("You have started the game.");
 		System.out.println("What would you like to do?");
 		System.out.println();
-		printMenu();
+		printMenu(user);
 	}
 	
-	public static void printMenu() {
+	public static void printMenu(User user) {
 		System.out.println("---------------MENU---------------\n");
 		System.out.println("Right - move right");
 		System.out.println("Left - move left");
@@ -24,8 +24,7 @@ public class Game {
 		System.out.println("Down - move down\n");
 		
 		System.out.println("Map - display map");
-		System.out.println("Health - display current health");
-		System.out.println("Heal - drink health potion\n");
+		System.out.println("Heal - heal " + user.getHealthBar() + "\n");
 		System.out.println("Help - display commands");
 		System.out.println("Quit - end game\n");
 		System.out.println("---------------MENU---------------");
@@ -36,7 +35,7 @@ public class Game {
 		
 		switch (input) {
 		case "help":
-			printMenu();
+			printMenu(gameMap.user);
 			break;
 		case "right":
 		case "left":
@@ -44,19 +43,17 @@ public class Game {
 		case "down":
     		gameMap.user.move(input);
     		if (gameMap.getFightingMonsterIndex() == -1) {
-    			System.out.println("You move " + input + ", but there's nothing of interest.");
+//    			System.out.println("You move " + input + ", but there's nothing of interest.");
     			break;
     		} else {
     			gameMap.executeBattle(gameMap.getFightingMonsterIndex(), scnr);
-    		}
+    		}  //NECESSARY- TRYING TO MOVE SOMEHWERE ELSE
 			break;
 		case "map":
     		gameMap.printMap();
 			break;
-		case "health":
-			System.out.println("Your health is " + gameMap.user.getHealth() 
-								+ "/" + gameMap.user.getMaxHealth());
-			
+		case "heal":
+			gameMap.user.heal();
 			break;
 		default:
 			System.out.println("Nothing interesting happens. \"help\" for valid commands.");
@@ -69,7 +66,7 @@ public class Game {
         Map gameMap = new Map();
         gameMap.addMonsters();
                 
-        printGameStart();
+        printGameStart(gameMap.user);
         String input = scnr.next();
         
         while (!input.toLowerCase().equals("quit")) {
@@ -83,8 +80,11 @@ public class Game {
         			return;
         		} else {
         			gameMap = new Map();
-    		        gameMap.addMonsters();    
-    		        printGameStart();
+    		        gameMap.addMonsters();  
+    				for (int i=0; i<10; i++) {
+    					System.out.println();
+    				}
+    		        printGameStart(gameMap.user);
         		}
         	}
         	
@@ -109,6 +109,7 @@ public class Game {
 		        newGameCreated = false;
 				break;
 			default:
+				System.out.println("Nothing interesting happens.");
 				input = scnr.next();
 				break;
 			}

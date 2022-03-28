@@ -11,22 +11,22 @@ public class Game {
 	
 	public static void printGameStart() {
 		System.out.println("You have started the game.");
-		System.out.println("What would you like to do? Type \\\"help\\\" for options.");
+		System.out.println("What would you like to do?");
 		System.out.println();
 		printMenu();
 	}
+	
 	public static void printMenu() {
-		System.out.println("Help - displays commands");
 		System.out.println("Right - move right");
 		System.out.println("Left - move left");
 		System.out.println("Up - move up");
 		System.out.println("Down - move down");
 		System.out.println("Map - displays map");
+		System.out.println("Help - displays commands");
 		System.out.println("Quit - ends game");
-		
 	}
 	
-	public static void executeMenu(String input, Map gameMap) {
+	public static void executeMenu(String input, Map gameMap, Scanner scnr) {
 		input.toLowerCase();
 		
 		switch (input) {
@@ -38,9 +38,19 @@ public class Game {
 		case "up":
 		case "down":
     		gameMap.user.move(input);
+    		if (gameMap.getFightingMonsterIndex() == -1) {
+    			break;
+    		} else {
+    			gameMap.executeBattle(gameMap.getFightingMonsterIndex(), scnr);
+    		}
 			break;
 		case "map":
     		gameMap.printMap();
+			break;
+		case "health":
+			System.out.println("user health is " + gameMap.user.getHealth());
+			gameMap.user.setHealth(gameMap.user.getHealth()-20);
+			System.out.println("user health is now " + gameMap.user.getHealth());
 			break;
 		default:
 			System.out.println("Nothing interesting happens. \"help\" for valid commands.");
@@ -52,20 +62,12 @@ public class Game {
 		Scanner scnr = new Scanner(System.in);
         Map gameMap = new Map();
         gameMap.addMonsters();
-        
-//        System.out.println(gameMap.user.location.getXY());
-//        System.out.println(gameMap.rat.location.getXY());
-//        System.out.println(gameMap.zombie.location.getXY());
-//        System.out.println(gameMap.boss.location.getXY());
-//        System.out.println(gameMap.monsterList);
-//		gameMap.printMap();
-
-        
+                
         printGameStart();
         String input = scnr.next();
         
         while (!input.toLowerCase().equals("quit")) {
-        	executeMenu(input, gameMap);
+        	executeMenu(input, gameMap, scnr);
         	System.out.println();
         	input = scnr.next();
         }

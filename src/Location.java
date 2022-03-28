@@ -14,7 +14,6 @@ public class Location {
 	public void resetLocation() {
 		x = randGen.nextInt(5)+1;
 		y = randGen.nextInt(5)+1;
-
 	}
 	
 	public int getX() {

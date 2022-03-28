@@ -1,24 +1,11 @@
+import java.util.Random;
 
 public class Monster extends Character {
-	private String type;
-	
-	public Monster(String type, String symbol, int health, int attackDamage, boolean hasKey, boolean hasMap, boolean hasBearHands,
-			int healthPotions) {
-		super(symbol, health, attackDamage, hasKey, hasMap, hasBearHands, healthPotions);
-		this.setType(type);
-	}
 
-	
-//	public Monster(String type, String symbol, int health, int attackDamage, boolean hasKey, boolean hasMap) {
-//		super(symbol, health, attackDamage);
-//		this.type = type;
-//		this.HasKey(hasKey);
-//		this.hasMap(hasMap);
-//	}
-
-	void attack(User user) {
-		// TODO Auto-generated method stub
-		
+	public Monster(String name, String symbol, int health, int attackDamage, boolean hasKey, boolean hasMap,
+			boolean hasBearHands, int healthPotions) {
+		super(name, symbol, health, attackDamage, hasKey, hasMap, hasBearHands, healthPotions);
+		// TODO Auto-generated constructor stub
 	}
 
 	public void resetLocation() {
@@ -30,17 +17,18 @@ public class Monster extends Character {
 			if (this.getHasKey()) {
 				user.setHasKey(true);
 				this.setHasKey(false);
-				System.out.println("The " + this.type + " has dropped a key!");
+				System.out.println("The " + this.getName() + " has dropped a key!");
 			}
 			if (this.getHasBearHands()) {
 				user.setHasBearHands(true);
+				user.setAttackDamage(user.getAttackDamage()*2);
 				this.setHasBearHands(false);
-				System.out.println("The " + this.type + " has dropped bear hands!");
+				System.out.println("The " + this.getName() + " has dropped bear hands!");
 			}
 			if (this.getHasMap()) {
 				user.setHasMap(true);
 				this.setHasMap(false);
-				System.out.println("The " + this.type + " has dropped a map!");
+				System.out.println("The " + this.getName() + " has dropped a map!");
 			}
 			
 			
@@ -48,27 +36,54 @@ public class Monster extends Character {
 				user.setHealthPotions(user.getHealthPotions() + this.getHealthPotions());
 				this.setHealthPotions(0);
 				
-				if (this.type.equals("dog")) {
+				if (this.getName().equals("dog")) {
 					System.out.println("The nice dog wags its tail and gives you a health potion!");
 				}
-				System.out.println("The " + this.type + " has dropped health potions!");
+				System.out.println("The " + this.getName() + " has dropped health potions!");
 			}
 		}
 		
 	}
 
+	
 
-	public String getType() {
-		return type;
+	@Override
+	void attack(Character user) {
+				
+		if (this.getHealth() == 0) {
+			return;
+		}
+		
+		Random randGen = new Random();
+		
+		int userCurrHealth = user.getHealth();
+		int damageDealt = randGen.nextInt(this.getAttackDamage() + 1);
+		
+		if (damageDealt > userCurrHealth) {
+			damageDealt = userCurrHealth;
+		}
+		userCurrHealth -= damageDealt;
+
+		user.setHealth(userCurrHealth);
+		
+		printAttackMessage(user, damageDealt);
+		
+		
+		return;
+		
+		
 	}
-
-
-	public void setType(String type) {
-		this.type = type;
+	
+	@Override
+	void printAttackMessage(Character user, int damageDealt) {
+		
+		if (user.getHealth() == 0) {
+			System.out.println("The " + this.getName() + " has killed " + user.getName() + "!");
+		} else {
+			System.out.println("The " + this.getName() + " attacks back and " + user.getName() + " take " 
+						+ damageDealt + " damage. (" + user.getHealth() + "/" + user.getMaxHealth() + " health)");
+		}
 	}
-
-
-
-
-
+	
 }
+

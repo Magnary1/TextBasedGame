@@ -3,13 +3,13 @@ import java.util.Scanner;
 
 public class Map {
 
-	User user = new User("X", 100, 20, false, false, false, 0);
+	User user = new User("you", "X", 100, 10, false, false, false, 0);
 	ArrayList<Monster> monsterList = new ArrayList<Monster>();
 	
 	Monster rat = new Monster("rat", "R", 20, 5, true, false, false, 2);
-	Monster dog = new Monster("dog", "D", 1000, 1000, false, false, false, 1);
-	Monster bear = new Monster("bear", "B", 20, 5, false, true, true, 5);
-	Monster boss = new Monster("king", "K", 20, 5, false, false, false, 100);
+	Monster dog = new Monster("dog", "D", 1, 1000, false, false, false, 1);
+	Monster bear = new Monster("bear", "B", 50, 10, false, true, true, 5);
+	Monster boss = new Monster("king", "K", 100, 4440, false, false, false, 100);
 	
 	public void addMonsters() {
 		monsterList.add(rat);
@@ -67,6 +67,9 @@ public class Map {
 			default:
 				break;
 			}
+			if (user.getHealth() == 0) {
+				return;
+			}
 			input = scnr.next();
 		}
 		
@@ -75,12 +78,12 @@ public class Map {
 	public void printBattleStart(Monster currMonster) {
 		System.out.print("You have run into ");
 		
-		if (currMonster.getType().equals("king")) {
+		if (currMonster.getName().equals("king")) {
 			System.out.print("the ");
 		} else {
 			System.out.print("a ");
 		}
-		System.out.println(currMonster.getType() + "! (" + currMonster.getHealth() + " health)");
+		System.out.println(currMonster.getName() + "! (" + currMonster.getHealth() + " health)");
 		
 		System.out.println("What would you like to do?\n");
 		
@@ -139,9 +142,9 @@ public class Map {
 		System.out.print(user.symbol + ": You, ");
 		for (int i=0; i<monsterList.size(); i++) {
 			if (monsterList.size()-1 == i) {
-				System.out.print(monsterList.get(i).symbol + ": " + monsterList.get(i).getType());
+				System.out.print(monsterList.get(i).symbol + ": " + monsterList.get(i).getName());
 			} else {
-				System.out.print(monsterList.get(i).symbol + ": " + monsterList.get(i).getType() + ", ");
+				System.out.print(monsterList.get(i).symbol + ": " + monsterList.get(i).getName() + ", ");
 			}
 		}
 		System.out.println();

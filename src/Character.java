@@ -10,11 +10,13 @@ public abstract class Character {
 	private boolean hasMap;
 	private boolean hasBearHands;
 	private int healthPotions;
+	private String name;
 	
 	protected boolean isAlive;
 	protected boolean inBattle;
 	
-	public Character(String symbol, int health, int attackDamage, boolean hasKey, boolean hasMap, boolean hasBearHands, int healthPotions) {
+	public Character(String name, String symbol, int health, int attackDamage, boolean hasKey, boolean hasMap, boolean hasBearHands, int healthPotions) {
+		this.setName(name);
 		this.symbol = symbol;
 		this.health = health;
 		this.MAX_HEALTH = health;
@@ -24,7 +26,11 @@ public abstract class Character {
 		this.hasBearHands = hasBearHands;
 		this.setHealthPotions(healthPotions);
 	}
+	
+	abstract void attack(Character character);
 		
+	abstract void printAttackMessage(Character character, int damageDealt);
+
 	public void move(String input) {
 		switch (input) {
 		case "right":
@@ -46,6 +52,14 @@ public abstract class Character {
 	
 	public String getXY() {
 		return this.location.getXY();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getHealth() {

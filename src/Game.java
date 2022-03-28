@@ -69,10 +69,54 @@ public class Game {
         while (!input.toLowerCase().equals("quit")) {
         	executeMenu(input, gameMap, scnr);
         	System.out.println();
+        	
+        	if (gameMap.user.getHealth() == 0) {
+        		printNewGamePrompt();
+        		boolean newGameStarted = executeNewGame(scnr, gameMap);
+        		if (!newGameStarted) {
+        			return;
+        		} else {
+        			gameMap = new Map();
+    		        gameMap.addMonsters();    
+    		        printGameStart();
+        		}
+        	}
+        	
+        	
         	input = scnr.next();
+        	
         }
         scnr.close();
 
+	}
+
+	private static boolean executeNewGame(Scanner scnr, Map gameMap) {
+		String input = scnr.next();
+		boolean newGameCreated = false;
+		
+		while (!input.toLowerCase().equals("quit") && !newGameCreated) {
+			switch (input) {
+			case "again":
+		        newGameCreated = true;
+		        break;
+			case "quit":
+		        newGameCreated = false;
+				break;
+			default:
+				input = scnr.next();
+				break;
+			}
+		}
+		return newGameCreated;
+		
+		
+	}
+
+	public static void printNewGamePrompt() {
+		System.out.println("Play again?");
+		System.out.println();
+		System.out.println("Again - play again");
+		System.out.println("Quit - to quit");
 	}
 
 

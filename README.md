@@ -16,4 +16,4 @@ Landing on enemy, fight menu displayed
 
 Fighting and defeating enemy and then healing
 
-<img src="(https://user-images.githubusercontent.com/90487153/161659424-94d3e24c-2258-4548-9984-a1341427b4d0.png" width=60% height=60%>
+<img src="https://user-images.githubusercontent.com/90487153/161659424-94d3e24c-2258-4548-9984-a1341427b4d0.png" width=60% height=60%>

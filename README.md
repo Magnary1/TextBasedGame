@@ -13,7 +13,7 @@ This game needs Java Development Kit installed (https://www.oracle.com/java/tech
 
 Start screen
 
-<img src="https://user-images.githubusercontent.com/90487153/161658880-087123ee-d214-41da-8a87-544b1d9b521e.png" width=60% height=60%>
+<img src="https://user-images.githubusercontent.com/90487153/161674494-532d5810-5d4f-4d93-a734-828c21a075b1.png" width=60% height=60%>
 
 Map Displayed
 

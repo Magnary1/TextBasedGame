@@ -31,7 +31,7 @@ public class Game {
 	}
 	
 	public static void executeMenu(String input, Map gameMap, Scanner scnr) {
-		input.toLowerCase();
+		
 		
 		switch (input) {
 		case "help":
@@ -67,9 +67,9 @@ public class Game {
         gameMap.addMonsters();
                 
         printGameStart(gameMap.user);
-        String input = scnr.next();
+        String input = scnr.next().toLowerCase();
         
-        while (!input.toLowerCase().equals("quit")) {
+        while (!input.equals("quit")) {
         	executeMenu(input, gameMap, scnr);
         	System.out.println();
         	
@@ -89,7 +89,7 @@ public class Game {
         	}
         	
         	
-        	input = scnr.next();
+        	input = scnr.next().toLowerCase();
         	
         }
         scnr.close();
@@ -97,10 +97,10 @@ public class Game {
 	}
 
 	private static boolean executeNewGame(Scanner scnr, Map gameMap) {
-		String input = scnr.next();
+		String input = scnr.next().toLowerCase();
 		boolean newGameCreated = false;
 		
-		while (!input.toLowerCase().equals("quit") && !newGameCreated) {
+		while (!input.equals("quit") && !newGameCreated) {
 			switch (input) {
 			case "again":
 		        newGameCreated = true;
@@ -110,7 +110,7 @@ public class Game {
 				break;
 			default:
 				System.out.println("Nothing interesting happens.");
-				input = scnr.next();
+				input = scnr.next().toLowerCase();
 				break;
 			}
 		}

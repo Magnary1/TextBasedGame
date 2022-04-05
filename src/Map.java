@@ -47,8 +47,8 @@ public class Map {
 		System.out.println();
 		printBattleStart(currMonster);
 		
-		String input = scnr.next();
-		while (!input.toLowerCase().equals("run")) {
+		String input = scnr.next().toLowerCase();
+		while (!input.equals("run")) {
 			System.out.println();
 			switch (input) {
 			case "attack":
@@ -76,7 +76,7 @@ public class Map {
 				return;
 			}
 			System.out.println();
-			input = scnr.next();
+			input = scnr.next().toLowerCase();
 		}
 		
 	}

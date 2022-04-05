@@ -1,6 +1,20 @@
 # This is my TextBasedGame
 
-For directions to download, see latest relase off to the right.
+This game needs Java Development Kit installed (https://www.oracle.com/java/technologies/downloads/#java18)
+
+
+Directions:
+
+
+Steps to play:
+
+1. Download [TextBasedGame.zip](https://github.com/Magnary1/TextBasedGame/files/8414351/TextBasedGame.zip)
+2. Unzip TextBasedGame.zip
+3. Open TextBasedGameLauncher.bat to run the game in the command line.
+4. Play the game!
+
+
+
 
 Start screen
 

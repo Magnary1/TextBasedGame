@@ -1,4 +1,4 @@
-# Jonathan Hayes TextBasedGame
+# Jonathan Hayes - TextBasedGame
 
 This game needs Java Development Kit installed (https://www.oracle.com/java/technologies/downloads/#java18)
 
